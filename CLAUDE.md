@@ -20,7 +20,11 @@ Set on issues via labels. No label = project default.
 
 ### Quality Gates (ALL must pass before PR)
 
-_Not yet defined. Run `/simplewins:handoff guardrail` to set up quality gates._
+| Gate | Command | Required |
+|------|---------|----------|
+| Unit Tests | `npm test` | Yes |
+| ESLint | `npx eslint .` | Yes |
+| Prettier | `npx prettier --check .` | Yes |
 
 ### Commit Format
 

@@ -4,7 +4,9 @@
       "Bash(.agents/scripts/handoff/*)",
       "Bash(chmod +x *)",
       "Bash(gh *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(npm *)",
+      "Bash(npx *)"
     ],
     "defaultMode": "acceptEdits"
   }
