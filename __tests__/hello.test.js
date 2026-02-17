@@ -40,6 +40,27 @@ describe('hello CLI', () => {
     expect(exitCode).toBe(0);
   });
 
+  test('--name personalizes the greeting', async () => {
+    const { stdout, stderr, exitCode } = await run(['--name', 'Alice']);
+    expect(stdout).toBe('Hello, Alice!');
+    expect(stderr).toBe('');
+    expect(exitCode).toBe(0);
+  });
+
+  test('-n short form personalizes the greeting', async () => {
+    const { stdout, stderr, exitCode } = await run(['-n', 'Alice']);
+    expect(stdout).toBe('Hello, Alice!');
+    expect(stderr).toBe('');
+    expect(exitCode).toBe(0);
+  });
+
+  test('--name without value prints error and exits 1', async () => {
+    const { stdout, stderr, exitCode } = await run(['--name']);
+    expect(stderr).toContain('Missing value for --name');
+    expect(stdout).toBe('');
+    expect(exitCode).toBe(1);
+  });
+
   test('unknown flag prints error to stderr and exits 1', async () => {
     const { stdout, stderr, exitCode } = await run(['--foo']);
     expect(stderr).toContain('Unknown option: --foo');
