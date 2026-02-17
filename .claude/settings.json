@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.agents/scripts/handoff/*)",
+      "Bash(chmod +x *)",
+      "Bash(gh *)",
+      "Bash(git *)"
+    ],
+    "defaultMode": "acceptEdits"
+  }
+}
