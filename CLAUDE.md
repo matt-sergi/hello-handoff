@@ -10,21 +10,21 @@ This project uses the [handoff plugin](https://github.com/joe-thirtytwonineteen/
 
 Default: **full**
 
-| Label | Task Selection | Plan | Merge |
-|-------|---------------|------|-------|
-| `autonomy:full` | Agent proceeds | Posts for record, proceeds | Human merges |
-| `autonomy:plan` | Agent proceeds | Posts and **waits** | Human merges |
-| `autonomy:supervised` | Reports and **waits** | Posts and **waits** | Human merges |
+| Label                 | Task Selection        | Plan                       | Merge        |
+| --------------------- | --------------------- | -------------------------- | ------------ |
+| `autonomy:full`       | Agent proceeds        | Posts for record, proceeds | Human merges |
+| `autonomy:plan`       | Agent proceeds        | Posts and **waits**        | Human merges |
+| `autonomy:supervised` | Reports and **waits** | Posts and **waits**        | Human merges |
 
 Set on issues via labels. No label = project default.
 
 ### Quality Gates (ALL must pass before PR)
 
-| Gate | Command | Required |
-|------|---------|----------|
-| Unit Tests | `npm test` | Yes |
-| ESLint | `npx eslint .` | Yes |
-| Prettier | `npx prettier --check .` | Yes |
+| Gate       | Command                  | Required |
+| ---------- | ------------------------ | -------- |
+| Unit Tests | `npm test`               | Yes      |
+| ESLint     | `npx eslint .`           | Yes      |
+| Prettier   | `npx prettier --check .` | Yes      |
 
 ### Commit Format
 
@@ -32,8 +32,8 @@ Conventional commits: `feat(scope): description`, `fix(scope): description`, etc
 
 ### Agents
 
-| Agent | Label | Worktree |
-|-------|-------|----------|
+| Agent   | Label                | Worktree                              |
+| ------- | -------------------- | ------------------------------------- |
 | agent-1 | `matt-sergi:agent-1` | `../hello-handoff-matt-sergi-agent-1` |
 
 Manage agents: `/simplewins:handoff agent`, `/simplewins:handoff agent add <name>`, `/simplewins:handoff agent remove <name>`
@@ -59,6 +59,7 @@ Backlog -> Ready -> In Progress -> In Review -> In Human Review -> Done
 ### Before Every Work or Review Cycle
 
 Use the sync script to start clean from your agent's base branch (never `main` -- it's checked out in the primary worktree):
+
 ```bash
 .agents/scripts/handoff/sync-agent-branch.sh <AGENT_ID>
 ```
@@ -72,6 +73,7 @@ Under `autonomy:plan`: Agent posts implementation plan as issue comment and wait
 Under `autonomy:supervised`: Agent reports task selection AND posts plan, waiting for approval at both steps. Human merges PR.
 
 **Regardless of autonomy level:**
+
 - Agents NEVER approve PRs -- only `--comment` or `--request-changes`. Human merges to main.
 - Guardrails always run before creating a PR.
 - Handoff comments are always posted on every status transition.
@@ -79,6 +81,7 @@ Under `autonomy:supervised`: Agent reports task selection AND posts plan, waitin
 ### Script Operations
 
 All workflow operations use pre-approved scripts. Pass dynamic values as arguments:
+
 ```bash
 .agents/scripts/handoff/query-by-status.sh "Ready"
 .agents/scripts/handoff/check-and-set-status.sh 42 "Ready" "In Progress"
