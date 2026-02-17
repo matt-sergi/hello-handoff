@@ -113,25 +113,28 @@ Every issue can be tagged with a label that controls how much oversight the agen
 
 ### The three levels
 
-| Label | What it means |
-|-------|--------------|
-| `autonomy:full` | Agent handles it end-to-end. You just merge the PR. |
-| `autonomy:plan` | Agent finds the task, but waits for you to approve the plan before coding. |
-| `autonomy:supervised` | Agent asks before claiming the task AND before coding. Full oversight. |
+| Label                 | What it means                                                              |
+| --------------------- | -------------------------------------------------------------------------- |
+| `autonomy:full`       | Agent handles it end-to-end. You just merge the PR.                        |
+| `autonomy:plan`       | Agent finds the task, but waits for you to approve the plan before coding. |
+| `autonomy:supervised` | Agent asks before claiming the task AND before coding. Full oversight.     |
 
 ### When to use each
 
 **Full autonomy** — for issues where you trust the agent to get it right:
+
 - Dependency updates, typo fixes, documentation
 - Bugs with clear reproduction steps
 - Features with detailed acceptance criteria
 
 **Plan review** — for issues where the approach matters:
+
 - Features requiring design decisions
 - Refactoring with architectural impact
 - Changes to public APIs
 
 **Supervised** — for issues where you want full control:
+
 - Security-critical changes
 - First time working in a new area
 - High-risk changes where mistakes are expensive
@@ -139,11 +142,13 @@ Every issue can be tagged with a label that controls how much oversight the agen
 ### How to set autonomy on an issue
 
 **At creation:**
+
 ```bash
 gh issue create --title "Fix login bug" --label "autonomy:supervised"
 ```
 
 **On an existing issue:**
+
 ```bash
 gh issue edit 42 --add-label "autonomy:full"
 ```
@@ -192,6 +197,7 @@ If an agent posted a plan and is waiting for approval (`autonomy:plan` or `auton
 ### Reverting agent work
 
 Standard git procedures:
+
 ```bash
 # Revert a merge commit
 git revert -m 1 <merge-commit-sha>
@@ -203,6 +209,7 @@ git reset --hard <commit-before-merge>
 ### When an agent gets stuck
 
 If an issue has been "In Progress" for too long with no activity, the agent may have failed. Check:
+
 1. Is the Claude process still running?
 2. Check the issue comments — the agent should have posted a handoff moving it to Backlog if it got stuck.
 3. If the agent crashed without a handoff, manually move the issue back to "Ready" on the board.
@@ -221,9 +228,10 @@ Two agents claiming the same issue is prevented by optimistic locking (`check-an
 ```
 
 Or edit `.agents/config.yml` directly:
+
 ```yaml
 autonomy:
-  default: "plan"    # full | plan | supervised
+  default: 'plan' # full | plan | supervised
 ```
 
 ### Adding or changing guardrails
@@ -262,20 +270,20 @@ If your project changes significantly (new repo, new tracker, team restructure):
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `/simplewins:handoff setup` | Configure project (consultative interview) |
-| `/simplewins:handoff guardrail` | Define quality gates (mandatory testing) |
+| Command                               | Description                                   |
+| ------------------------------------- | --------------------------------------------- |
+| `/simplewins:handoff setup`           | Configure project (consultative interview)    |
+| `/simplewins:handoff guardrail`       | Define quality gates (mandatory testing)      |
 | `/simplewins:handoff plan [desc\|#N]` | Interactively plan an epic, create sub-issues |
-| `/simplewins:handoff work` | Find and work on highest priority task |
-| `/simplewins:handoff do #N` | Work on specific issue |
-| `/simplewins:handoff review [#N]` | Review a PR |
-| `/simplewins:handoff agent` | List all agents |
-| `/simplewins:handoff agent add X` | Add a new agent |
-| `/simplewins:handoff agent remove X` | Remove an agent |
-| `/simplewins:handoff manual` | Regenerate this manual |
-| `/simplewins:handoff tune` | Adjust autonomy and process settings |
-| `/simplewins:handoff permissions` | Scan and consolidate agent tool permissions |
+| `/simplewins:handoff work`            | Find and work on highest priority task        |
+| `/simplewins:handoff do #N`           | Work on specific issue                        |
+| `/simplewins:handoff review [#N]`     | Review a PR                                   |
+| `/simplewins:handoff agent`           | List all agents                               |
+| `/simplewins:handoff agent add X`     | Add a new agent                               |
+| `/simplewins:handoff agent remove X`  | Remove an agent                               |
+| `/simplewins:handoff manual`          | Regenerate this manual                        |
+| `/simplewins:handoff tune`            | Adjust autonomy and process settings          |
+| `/simplewins:handoff permissions`     | Scan and consolidate agent tool permissions   |
 
 ### Status Lifecycle
 
@@ -301,9 +309,9 @@ HANDOFF-MANUAL.md           # This file
 
 ### Autonomy Quick Reference
 
-| Want this? | Use this label |
-|------------|---------------|
-| Agent handles everything, I just merge | `autonomy:full` |
-| I approve the plan, agent implements | `autonomy:plan` |
-| I approve every step | `autonomy:supervised` |
-| Use the project default (full) | No label needed |
+| Want this?                             | Use this label        |
+| -------------------------------------- | --------------------- |
+| Agent handles everything, I just merge | `autonomy:full`       |
+| I approve the plan, agent implements   | `autonomy:plan`       |
+| I approve every step                   | `autonomy:supervised` |
+| Use the project default (full)         | No label needed       |

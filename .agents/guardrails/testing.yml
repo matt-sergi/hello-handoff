@@ -1,10 +1,10 @@
 name: testing
 required: true
-description: "Run the test suite to verify correctness"
+description: 'Run the test suite to verify correctness'
 
 gates:
-  - name: "unit-tests"
-    command: "npm test"
-    pass-condition: "exit-code-zero"
-    description: "Run all unit tests"
-    run: "before-pr"
+  - name: 'unit-tests'
+    command: 'npm test'
+    pass-condition: 'exit-code-zero'
+    description: 'Run all unit tests'
+    run: 'before-pr'
