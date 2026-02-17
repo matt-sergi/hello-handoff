@@ -1,10 +1,10 @@
 name: formatting
 required: true
-description: "Enforce consistent code formatting with Prettier"
+description: 'Enforce consistent code formatting with Prettier'
 
 gates:
-  - name: "prettier"
-    command: "npx prettier --check ."
-    pass-condition: "exit-code-zero"
-    description: "Verify code formatting matches Prettier rules"
-    run: "before-pr"
+  - name: 'prettier'
+    command: 'npx prettier --check .'
+    pass-condition: 'exit-code-zero'
+    description: 'Verify code formatting matches Prettier rules'
+    run: 'before-pr'
